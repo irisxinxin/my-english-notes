@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的英语语料本</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="title">
+        <span class="logo">📒</span>
+        我的英语语料本
+      </h1>
+      <div class="stats" id="stats">
+        <span class="stat"><span class="stat-num" id="totalCount">0</span> 卡片</span>
+        <span class="stat"><span class="stat-num" id="masteredCount">0</span> 已掌握</span>
+        <span class="stat"><span class="stat-num" id="reviewCount">0</span> 待复习</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <main class="container">
+    <!-- 普通视图 toolbar -->
+    <div class="toolbar" id="toolbar">
+      <input type="search" id="search" placeholder="🔍 搜索中文或英文..." />
+      <div class="filter">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="new">新</button>
+        <button class="filter-btn" data-filter="review">待复习</button>
+        <button class="filter-btn" data-filter="mastered">已掌握</button>
+      </div>
+    </div>
+
+    <!-- 卡片/日期/复习视图 -->
+    <div class="cards" id="cards"></div>
+    <div class="empty" id="empty" hidden>没有匹配的卡片</div>
+
+    <!-- 统计视图 -->
+    <section id="statsView" hidden>
+      <div class="stat-panel">
+        <div class="stat-card">
+          <span class="stat-card-num" id="sv_total">0</span>
+          <span class="stat-card-label">总卡片数</span>
+        </div>
+        <div class="stat-card mastered">
+          <span class="stat-card-num" id="sv_mastered">0</span>
+          <span class="stat-card-label">已掌握</span>
+        </div>
+        <div class="stat-card review">
+          <span class="stat-card-num" id="sv_review">0</span>
+          <span class="stat-card-label">待复习</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card-num" id="sv_days">0</span>
+          <span class="stat-card-label">学习天数</span>
+        </div>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-section-header">
+          <h3>📈 每日学习量</h3>
+          <div class="chart-toggle" id="chartToggle">
+            <button class="chart-btn active" data-range="7">最近 7 天</button>
+            <button class="chart-btn" data-range="30">最近 30 天</button>
+          </div>
+        </div>
+        <div class="chart" id="dailyChart"></div>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-section-header">
+          <h3>📚 主题分布</h3>
+        </div>
+        <div class="topic-bars" id="topicBars"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>点击卡片翻转 · 数据来自 <code>data.js</code> · 进度存在浏览器本地</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
