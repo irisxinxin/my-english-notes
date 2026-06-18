@@ -24,6 +24,15 @@ let currentFilter = "all";
 let currentSearch = "";
 let chartRange = 7;
 
+// 必背金句 Set（用于卡片置顶 + 视觉强化）
+const MUST_KNOW_SET = new Set(window.mustKnowIds || []);
+// 按金句置顶排序（稳定，保留原顺序）
+function sortMustKnowFirst(arr) {
+  const must = arr.filter(c => MUST_KNOW_SET.has(c.id));
+  const rest = arr.filter(c => !MUST_KNOW_SET.has(c.id));
+  return [...must, ...rest];
+}
+
 const VIEW_DATE = "__date__";
 const VIEW_REVIEW = "__review__";
 const VIEW_STATS = "__stats__";
@@ -97,7 +106,7 @@ function render() {
 
 // ===== 卡片渲染 =====
 function getFilteredCards() {
-  return cardData.filter(c => {
+  const filtered = cardData.filter(c => {
     if (currentTab !== "全部" && c.topic !== currentTab) return false;
     const status = cardStatus[c.id] || "new";
     if (currentFilter !== "all" && currentFilter !== status) return false;
@@ -109,6 +118,7 @@ function getFilteredCards() {
     }
     return true;
   });
+  return sortMustKnowFirst(filtered);
 }
 
 function renderCards() {
@@ -151,7 +161,7 @@ function renderByDate(container) {
 
     const grid = document.createElement("div");
     grid.className = "cards-grid";
-    groups[d].forEach(c => grid.appendChild(makeCard(c)));
+    sortMustKnowFirst(groups[d]).forEach(c => grid.appendChild(makeCard(c)));
     section.appendChild(grid);
 
     container.appendChild(section);
@@ -192,19 +202,21 @@ function renderReview(container) {
 
 function makeCard(card) {
   const status = cardStatus[card.id] || "new";
+  const isMust = MUST_KNOW_SET.has(card.id);
   const div = document.createElement("div");
-  div.className = "card";
+  div.className = "card" + (isMust ? " must-know" : "");
   div.dataset.id = card.id;
 
   const statusIcon = status === "mastered" ? "✓" : status === "review" ? "✗" : "•";
   const statusClass = status === "mastered" ? "mastered" : status === "review" ? "review" : "";
   const noteHTML = card.note ? `<div class="card-note">💡 ${card.note}</div>` : "";
+  const mustBadge = isMust ? `<span class="must-badge" title="必背金句">💎</span>` : "";
 
   div.innerHTML = `
     <div class="card-inner">
       <div class="card-face card-front">
         <div class="card-meta">
-          <span class="card-topic">${card.topic}</span>
+          <span class="card-topic">${card.topic}${mustBadge}</span>
           <span class="card-date">${card.date || ""}</span>
         </div>
         <div class="card-text">${card.zh}</div>

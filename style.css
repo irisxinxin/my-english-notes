@@ -363,6 +363,22 @@ body {
   background: var(--card-back);
 }
 
+/* 必背金句卡：顶部金边 + 微妙阴影强化 */
+.card.must-know .card-face {
+  border-top: 3px solid var(--primary);
+  box-shadow: 0 1px 3px rgba(217,119,6,0.12), 0 6px 18px rgba(217,119,6,0.08);
+}
+.card.must-know:hover .card-face {
+  box-shadow: 0 4px 14px rgba(217,119,6,0.18), 0 14px 32px rgba(217,119,6,0.12);
+}
+.must-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
 .card-meta {
   display: flex;
   justify-content: space-between;
