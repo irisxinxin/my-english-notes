@@ -340,5 +340,78 @@ document.getElementById("chartToggle").addEventListener("click", e => {
   renderDailyChart(chartRange);
 });
 
+// ===== 必背金句 Hero 轮播 =====
+const HERO_INTERVAL_MS = 5000;
+const heroCards = (window.mustKnowIds || [])
+  .map(id => cardData.find(c => c.id === id))
+  .filter(Boolean);
+
+let heroIdx = heroCards.length > 0 ? Math.floor(Math.random() * heroCards.length) : 0;
+let heroPlaying = true;
+let heroTimer = null;
+let heroProgressStart = 0;
+let heroProgressTimer = null;
+
+function renderHero() {
+  if (heroCards.length === 0) {
+    document.getElementById("hero").hidden = true;
+    return;
+  }
+  const card = heroCards[heroIdx];
+  document.getElementById("heroTopic").textContent = card.topic;
+  // 英文保留 HTML 高亮（pattern / phrase）
+  document.getElementById("heroEn").innerHTML = card.en;
+  // 中文去掉可能的 <br>，单行展示
+  document.getElementById("heroZh").innerHTML = card.zh.replace(/<br\s*\/?>/gi, " · ");
+  document.getElementById("heroCounter").textContent = (heroIdx + 1) + " / " + heroCards.length;
+  // 重启进度条
+  heroProgressStart = performance.now();
+}
+
+function heroNext() { heroIdx = (heroIdx + 1) % heroCards.length; renderHero(); }
+function heroPrev() { heroIdx = (heroIdx - 1 + heroCards.length) % heroCards.length; renderHero(); }
+
+function startHeroTimer() {
+  stopHeroTimer();
+  heroTimer = setInterval(heroNext, HERO_INTERVAL_MS);
+  heroProgressTimer = setInterval(() => {
+    const elapsed = performance.now() - heroProgressStart;
+    const pct = Math.min(100, (elapsed / HERO_INTERVAL_MS) * 100);
+    document.getElementById("heroProgress").style.width = pct + "%";
+  }, 80);
+  heroProgressStart = performance.now();
+}
+function stopHeroTimer() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+  if (heroProgressTimer) { clearInterval(heroProgressTimer); heroProgressTimer = null; }
+}
+function togglePlay() {
+  heroPlaying = !heroPlaying;
+  document.getElementById("heroPlay").textContent = heroPlaying ? "⏸" : "▶";
+  if (heroPlaying) startHeroTimer();
+  else stopHeroTimer();
+}
+
+document.getElementById("heroPrev").addEventListener("click", () => {
+  heroPrev();
+  if (heroPlaying) startHeroTimer();
+});
+document.getElementById("heroNext").addEventListener("click", () => {
+  heroNext();
+  if (heroPlaying) startHeroTimer();
+});
+document.getElementById("heroPlay").addEventListener("click", togglePlay);
+
+// 鼠标悬停暂停
+document.getElementById("hero").addEventListener("mouseenter", () => {
+  if (heroPlaying) stopHeroTimer();
+});
+document.getElementById("hero").addEventListener("mouseleave", () => {
+  if (heroPlaying) startHeroTimer();
+});
+
+renderHero();
+if (heroCards.length > 0) startHeroTimer();
+
 // ===== 启动 =====
 render();

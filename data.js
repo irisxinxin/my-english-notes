@@ -270,3 +270,28 @@ window.cardData = [
     note: `Got it = 明白了；thanks for letting me know = 谢谢告诉我，标配回应`
   }
 ];
+
+// ========== 必背金句 ID 列表（顶部 hero 区轮播） ==========
+window.mustKnowIds = [
+  // Day 1 · 请求帮忙（核心句子）
+  2,   // I am writing to ask you a favor.
+  3,   // I was wondering if you could write a recommendation letter...
+  5,   // Would it be okay if I sent you my presentation draft for your review?
+  6,   // I wonder if you could spare ten minutes...
+  // Day 2 · 感谢（10 句金句）
+  203, // Your support is greatly appreciated.
+  204, // Thanks again for your clever and useful suggestion.
+  205, // I sincerely appreciate your time and attention.
+  206, // I don't know how I would have managed without your help.
+  208, // Can you stand one more compliment?
+  209, // If I can repay your kindness, let me know.
+  210, // I'm impressed!
+  211, // You've done it again!
+  214, // an absolute treasure / you might like to know
+  215, // I want to express my appreciation to all of you for ...
+  // 预约询问（实战 5 句）
+  301, // Do you have any available slots this afternoon?
+  302, // Are any other stylists available?
+  304, // Would you like to explore other dates?
+  305  // Got it, thanks for letting me know.
+];
