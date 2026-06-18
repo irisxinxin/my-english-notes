@@ -36,6 +36,7 @@ function sortMustKnowFirst(arr) {
 const VIEW_DATE = "__date__";
 const VIEW_REVIEW = "__review__";
 const VIEW_STATS = "__stats__";
+const VIEW_MUST = "__must__";
 
 // ===== 工具 =====
 function getTopics() {
@@ -68,6 +69,7 @@ function renderTabs() {
   container.appendChild(div);
 
   // 特殊视图 Tab
+  container.appendChild(makeTab(VIEW_MUST, "💎 必背金句", (window.mustKnowIds || []).length));
   container.appendChild(makeTab(VIEW_DATE, "📅 按日期", null));
   container.appendChild(makeTab(VIEW_REVIEW, "🔄 今日复习", countByStatus("review")));
   container.appendChild(makeTab(VIEW_STATS, "📊 统计", null));
@@ -125,6 +127,7 @@ function renderCards() {
   const container = document.getElementById("cards");
   container.innerHTML = "";
 
+  if (currentTab === VIEW_MUST) return renderMustKnow(container);
   if (currentTab === VIEW_DATE) return renderByDate(container);
   if (currentTab === VIEW_REVIEW) return renderReview(container);
 
@@ -166,6 +169,60 @@ function renderByDate(container) {
 
     container.appendChild(section);
   });
+}
+
+function renderMustKnow(container) {
+  const cards = (window.mustKnowIds || [])
+    .map(id => cardData.find(c => c.id === id))
+    .filter(Boolean);
+
+  if (cards.length === 0) {
+    container.innerHTML = `<div class="empty">还没有标记的必背金句</div>`;
+    return;
+  }
+
+  // 按 topic 分组
+  const groups = {};
+  cards.forEach(c => {
+    if (!groups[c.topic]) groups[c.topic] = [];
+    groups[c.topic].push(c);
+  });
+
+  const wrap = document.createElement("div");
+  wrap.className = "must-knows";
+
+  Object.entries(groups).forEach(([topic, items]) => {
+    const group = document.createElement("div");
+    group.className = "must-group";
+
+    const title = document.createElement("h3");
+    title.className = "must-group-title";
+    title.innerHTML = `${topic} <span class="must-group-count">${items.length}</span>`;
+    group.appendChild(title);
+
+    const list = document.createElement("div");
+    list.className = "must-list";
+    items.forEach(c => {
+      const item = document.createElement("div");
+      item.className = "must-item";
+      const status = cardStatus[c.id] || "new";
+      const statusIcon = status === "mastered" ? "✓" : status === "review" ? "✗" : "";
+      const statusClass = status === "mastered" ? "mastered" : status === "review" ? "review" : "";
+      item.innerHTML = `
+        <div class="must-item-en">${c.en}</div>
+        <div class="must-item-zh">
+          <span class="must-item-status ${statusClass}">${statusIcon}</span>
+          ${c.zh.replace(/<br\s*\/?>/gi, " · ")}
+        </div>
+      `;
+      list.appendChild(item);
+    });
+    group.appendChild(list);
+
+    wrap.appendChild(group);
+  });
+
+  container.appendChild(wrap);
 }
 
 function renderReview(container) {
@@ -351,79 +408,6 @@ document.getElementById("chartToggle").addEventListener("click", e => {
   chartRange = parseInt(e.target.dataset.range, 10);
   renderDailyChart(chartRange);
 });
-
-// ===== 必背金句 Hero 轮播 =====
-const HERO_INTERVAL_MS = 5000;
-const heroCards = (window.mustKnowIds || [])
-  .map(id => cardData.find(c => c.id === id))
-  .filter(Boolean);
-
-let heroIdx = heroCards.length > 0 ? Math.floor(Math.random() * heroCards.length) : 0;
-let heroPlaying = true;
-let heroTimer = null;
-let heroProgressStart = 0;
-let heroProgressTimer = null;
-
-function renderHero() {
-  if (heroCards.length === 0) {
-    document.getElementById("hero").hidden = true;
-    return;
-  }
-  const card = heroCards[heroIdx];
-  document.getElementById("heroTopic").textContent = card.topic;
-  // 英文保留 HTML 高亮（pattern / phrase）
-  document.getElementById("heroEn").innerHTML = card.en;
-  // 中文去掉可能的 <br>，单行展示
-  document.getElementById("heroZh").innerHTML = card.zh.replace(/<br\s*\/?>/gi, " · ");
-  document.getElementById("heroCounter").textContent = (heroIdx + 1) + " / " + heroCards.length;
-  // 重启进度条
-  heroProgressStart = performance.now();
-}
-
-function heroNext() { heroIdx = (heroIdx + 1) % heroCards.length; renderHero(); }
-function heroPrev() { heroIdx = (heroIdx - 1 + heroCards.length) % heroCards.length; renderHero(); }
-
-function startHeroTimer() {
-  stopHeroTimer();
-  heroTimer = setInterval(heroNext, HERO_INTERVAL_MS);
-  heroProgressTimer = setInterval(() => {
-    const elapsed = performance.now() - heroProgressStart;
-    const pct = Math.min(100, (elapsed / HERO_INTERVAL_MS) * 100);
-    document.getElementById("heroProgress").style.width = pct + "%";
-  }, 80);
-  heroProgressStart = performance.now();
-}
-function stopHeroTimer() {
-  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
-  if (heroProgressTimer) { clearInterval(heroProgressTimer); heroProgressTimer = null; }
-}
-function togglePlay() {
-  heroPlaying = !heroPlaying;
-  document.getElementById("heroPlay").textContent = heroPlaying ? "⏸" : "▶";
-  if (heroPlaying) startHeroTimer();
-  else stopHeroTimer();
-}
-
-document.getElementById("heroPrev").addEventListener("click", () => {
-  heroPrev();
-  if (heroPlaying) startHeroTimer();
-});
-document.getElementById("heroNext").addEventListener("click", () => {
-  heroNext();
-  if (heroPlaying) startHeroTimer();
-});
-document.getElementById("heroPlay").addEventListener("click", togglePlay);
-
-// 鼠标悬停暂停
-document.getElementById("hero").addEventListener("mouseenter", () => {
-  if (heroPlaying) stopHeroTimer();
-});
-document.getElementById("hero").addEventListener("mouseleave", () => {
-  if (heroPlaying) startHeroTimer();
-});
-
-renderHero();
-if (heroCards.length > 0) startHeroTimer();
 
 // ===== 启动 =====
 render();

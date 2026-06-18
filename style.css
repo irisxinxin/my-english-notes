@@ -82,134 +82,73 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* ===== 必背金句 Hero ===== */
-.hero {
-  max-width: 1200px;
-  margin: 20px auto 0;
-  padding: 0 24px;
-}
-.hero-card {
-  background: linear-gradient(135deg, #fff4e2 0%, #fde2c1 50%, #fbcfa1 100%);
-  border: 1px solid #f3d3a8;
-  border-radius: 20px;
-  padding: 32px 40px 28px;
-  text-align: center;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(217,119,6,0.10), 0 12px 40px rgba(217,119,6,0.06);
-}
-.hero-card::before {
-  content: "💎";
-  position: absolute;
-  top: 14px;
-  left: 20px;
-  font-size: 18px;
-  opacity: 0.5;
-}
-.hero-card::after {
-  content: "必背金句";
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  font-size: 11px;
+/* ===== 必背金句视图（左英右中并排） ===== */
+.must-knows { display: flex; flex-direction: column; gap: 28px; }
+.must-group { display: flex; flex-direction: column; gap: 10px; }
+.must-group-title {
+  font-size: 16px;
+  font-weight: 600;
   color: var(--primary-dark);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  opacity: 0.6;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
-.hero-topic {
-  display: inline-block;
-  background: var(--primary);
-  color: white;
-  padding: 4px 14px;
-  border-radius: 100px;
+.must-group-count {
   font-size: 11px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 2px 9px;
+  border-radius: 10px;
   font-weight: 600;
-  margin: 0 auto;
-  letter-spacing: 0.3px;
 }
-.hero-en {
+.must-list { display: flex; flex-direction: column; gap: 8px; }
+.must-item {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.must-item:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateX(2px);
+}
+.must-item-en {
   font-family: "Inter", "SF Pro Text", -apple-system, sans-serif;
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.55;
   color: var(--text);
-  line-height: 1.35;
-  padding: 0 16px;
-  animation: heroFade 0.5s ease;
 }
-.hero-en .pattern, .hero-en .phrase {
+.must-item-en .pattern, .must-item-en .phrase {
   font-size: inherit;
 }
-.hero-zh {
-  font-size: 14px;
+.must-item-zh {
+  font-size: 13px;
   color: var(--text-muted);
-  font-weight: 500;
-  animation: heroFade 0.5s ease 0.05s both;
-}
-@keyframes heroFade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-controls {
+  line-height: 1.55;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 14px;
-  margin-top: 12px;
+  gap: 8px;
 }
-.hero-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: white;
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--text-muted);
-  transition: all 0.15s;
-  font-family: inherit;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.must-item-status {
+  display: inline-block;
+  width: 14px;
+  font-weight: 700;
 }
-.hero-btn:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-.hero-counter {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  min-width: 50px;
-  text-align: center;
-}
-.hero-progress {
-  max-width: 200px;
-  margin: 10px auto 0;
-  height: 2px;
-  background: var(--border);
-  border-radius: 100px;
-  overflow: hidden;
-}
-.hero-progress-fill {
-  height: 100%;
-  background: var(--primary);
-  width: 0%;
-  transition: width 0.1s linear;
-  border-radius: 100px;
-}
+.must-item-status.mastered { color: var(--mastered); }
+.must-item-status.review { color: var(--review); }
 
 @media (max-width: 640px) {
-  .hero-en { font-size: 20px; }
-  .hero-card { padding: 28px 24px 24px; }
+  .must-item { grid-template-columns: 1fr; gap: 8px; }
 }
 
 /* ===== Tabs ===== */
