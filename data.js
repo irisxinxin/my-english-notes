@@ -104,5 +104,169 @@ window.cardData = [
     en: `<span class="pattern">I'm sorry to inconvenience you, but</span> ...?<br><br>例：<span class="phrase">I'm sorry to inconvenience you, but</span> do you think you could ...?`,
     date: `2026-06-04`,
     note: `inconvenience 比 bother 更正式，适合对上级/客户`
+  },
+
+  // ========== Day 2 · 感谢 appreciation ==========
+  {
+    id: 201,
+    topic: `感谢`,
+    zh: `我向你致敬！`,
+    en: `<span class="pattern">My hat's off to you!</span>`,
+    date: `2026-06-05`,
+    note: `习语：My hat's off to sb. — 向某人脱帽致敬`
+  },
+  {
+    id: 202,
+    topic: `感谢`,
+    zh: `你的努力使这成为可能。`,
+    en: `Your <span class="phrase">efforts have made</span> this <span class="phrase">possible</span>.`,
+    date: `2026-06-05`,
+    note: `现在完成时 have made；make sth possible 固定搭配，不加 become`
+  },
+  {
+    id: 203,
+    topic: `感谢`,
+    zh: `非常感谢您的支持。`,
+    en: `Your support <span class="pattern">is greatly appreciated</span>.`,
+    date: `2026-06-05`,
+    note: `support 不可数 → is（不是 are）；地道用 greatly appreciated，不是 very appreciated`
+  },
+  {
+    id: 204,
+    topic: `感谢`,
+    zh: `再次感谢你聪明而有用的建议。`,
+    en: `<span class="pattern">Thanks again for</span> your clever and useful suggestion.`,
+    date: `2026-06-05`,
+    note: `Thanks again 比 Thank you again 更地道；动词+again 时用复数 Thanks`
+  },
+  {
+    id: 205,
+    topic: `感谢`,
+    zh: `我真诚地感谢你的时间和关注。`,
+    en: `<span class="pattern">I sincerely appreciate</span> your <span class="phrase">time and attention</span>.`,
+    date: `2026-06-05`,
+    note: `商务用 attention（中性的关注），不要用 concern（是个人关切/担忧）`
+  },
+  {
+    id: 206,
+    topic: `感谢`,
+    zh: `如果没有你的帮助，我不知道该怎么办。`,
+    en: `<span class="pattern">I don't know how I would have managed</span> <span class="phrase">without your help</span>.`,
+    date: `2026-06-05`,
+    note: `虚拟语气 would have + 过去分词；简化版：I couldn't have done it without you.`
+  },
+  {
+    id: 207,
+    topic: `感谢`,
+    zh: `像你这样的客户是我们继续经营的原因。`,
+    en: `Customers like you <span class="pattern">are the reason we</span> <span class="phrase">stay in business</span>.`,
+    date: `2026-06-05`,
+    note: `Customers 复数 → are；stay in business = 继续经营，固定搭配`
+  },
+  {
+    id: 208,
+    topic: `感谢`,
+    zh: `你还能忍受多一句赞美吗？`,
+    en: `<span class="pattern">Can you stand one more</span> <span class="phrase">compliment</span>?`,
+    date: `2026-06-05`,
+    note: `俏皮句式，夸人前的铺垫；核心词 compliment（赞美），不是 gratitude`
+  },
+  {
+    id: 209,
+    topic: `感谢`,
+    zh: `如果我能报答你的好意，请告诉我。`,
+    en: `<span class="pattern">If I can</span> <span class="phrase">repay your kindness</span>, <span class="pattern">let me know</span>.`,
+    date: `2026-06-05`,
+    note: `repay your kindness = 报答好意（pay back 是还钱）；If ..., let me know 模板`
+  },
+  {
+    id: 210,
+    topic: `感谢`,
+    zh: `我印象深刻！`,
+    en: `<span class="pattern">I'm impressed!</span>`,
+    date: `2026-06-05`,
+    note: `impress 及物动词，主语是感受方（我）；同类：I'm shocked / amazed / surprised / touched`
+  },
+  {
+    id: 211,
+    topic: `感谢`,
+    zh: `你又一次成功了！`,
+    en: `<span class="pattern">You've done it again!</span>`,
+    date: `2026-06-05`,
+    note: `4 个词的地道口语，整句背下来`
+  },
+  {
+    id: 212,
+    topic: `感谢`,
+    zh: `过去的一年对公司来说是辉煌的一年，你为公司的成功做出了重大贡献。`,
+    en: `This past year has been <span class="phrase">a banner year</span> for the company, and you <span class="pattern">have contributed significantly to</span> its success.`,
+    date: `2026-06-05`,
+    note: `a banner year = 辉煌的一年（习语）；contribute significantly to = 对...做出重大贡献`
+  },
+  {
+    id: 213,
+    topic: `感谢`,
+    zh: `我想告诉你，我非常感谢你为我们公司的回收计划所做的一切。`,
+    en: `<span class="pattern">I want to tell you how much I appreciate</span> what you are doing for the <span class="phrase">recycling program</span> in our company.`,
+    date: `2026-06-05`,
+    note: `recycling program 不是 recycle plan；what you are doing 现在进行时强调持续行动`
+  },
+  {
+    id: 214,
+    topic: `感谢`,
+    zh: `作为杰罗姆小学的校长，你可能想知道，我们认为欧佳恩小姐是一个绝对的宝藏。`,
+    en: `<span class="phrase">As principal of</span> Jerome Elementary School, <span class="pattern">you might like to know that</span> we think Miss Eurgain is <span class="phrase">an absolute treasure</span>.`,
+    date: `2026-06-05`,
+    note: `As principal of ... 不带冠词 the；an absolute treasure = 绝对的宝藏（一个词搞定"超棒"）`
+  },
+  {
+    id: 215,
+    topic: `感谢`,
+    zh: `我想对你们所有人表示感谢，感谢你们上周为获得格里斯沃斯的合同付出了额外的时间和辛勤的工作。`,
+    en: `<span class="pattern">I want to express my appreciation to all of you for</span> the extra hours and hard work you put in last week <span class="phrase">to secure the Gryseworth contract</span>.`,
+    date: `2026-06-05`,
+    note: `团队感谢最高级句式；secure the contract = 拿下合同；all of you 不是 all you guys（书面/正式）`
+  },
+
+  // ========== 临时插课 · 预约/询问空闲（来自 WhatsApp 实战） ==========
+  {
+    id: 301,
+    topic: `预约询问`,
+    zh: `今天下午还有空位吗？`,
+    en: `Do you have <span class="phrase">any available slots</span> this afternoon?`,
+    date: `2026-06-05`,
+    note: `available slots = 可用的时间空位；afternoon 一个词无空格`
+  },
+  {
+    id: 302,
+    topic: `预约询问`,
+    zh: `还有别的发型师有空吗？`,
+    en: `<span class="pattern">Are any other stylists available</span>?`,
+    date: `2026-06-05`,
+    note: `stylist = 发型师；any other + 名词复数；商务对话不用 avail 缩写`
+  },
+  {
+    id: 303,
+    topic: `预约询问`,
+    zh: `X 今天正好不在。（软化坏消息）`,
+    en: `X is <span class="phrase">unfortunately away</span> today.`,
+    date: `2026-06-05`,
+    note: `unfortunately 用来软化负面信息；away today = 今天不在`
+  },
+  {
+    id: 304,
+    topic: `预约询问`,
+    zh: `您想看看其他日期吗？（委婉提议改期）`,
+    en: `<span class="pattern">Would you like to explore</span> <span class="phrase">other dates</span>?`,
+    date: `2026-06-05`,
+    note: `Would you like to explore ... = 委婉提议尝试其他选项`
+  },
+  {
+    id: 305,
+    topic: `预约询问`,
+    zh: `知道了，谢谢告诉我。（接收坏消息）`,
+    en: `<span class="pattern">Got it, thanks for letting me know.</span>`,
+    date: `2026-06-05`,
+    note: `Got it = 明白了；thanks for letting me know = 谢谢告诉我，标配回应`
   }
 ];
